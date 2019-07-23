@@ -292,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &206151906
 Transform:
   m_ObjectHideFlags: 0
@@ -539,8 +539,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 56, y: -76}
-  m_SizeDelta: {x: 160, y: 300}
+  m_AnchoredPosition: {x: 56, y: -10.700012}
+  m_SizeDelta: {x: 386.5, y: 1169.2}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1021246997
 MonoBehaviour:
@@ -687,7 +687,6 @@ MonoBehaviour:
   isFrontFacing: 1
   targetWidth: 640
   targetHeight: 480
-  cameraTexture: {fileID: 0}
 --- !u!114 &1367642431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,6 +701,7 @@ MonoBehaviour:
   startOnWake: 1
   discrete: 0
   emotions: -1
+  Listener: {fileID: 39936319}
   expressions: -1
 --- !u!4 &1367642432
 Transform:
@@ -970,7 +970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1918641898
 Transform:
   m_ObjectHideFlags: 0
@@ -1032,6 +1032,7 @@ MonoBehaviour:
   startOnWake: 1
   discrete: 0
   emotions: -1
+  Listener: {fileID: 491182187}
   expressions: -1
 --- !u!4 &1998199868
 Transform:
