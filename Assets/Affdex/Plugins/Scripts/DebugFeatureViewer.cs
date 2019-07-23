@@ -18,8 +18,6 @@ namespace Affdex
         /// </summary>
         public Texture debugTexture;
 
-        public Detector detector;
-
         /// <summary>
         /// Creates a texture if there is not already one defined.
         /// </summary>
@@ -31,7 +29,8 @@ namespace Affdex
                
                 if(debugTexture == null)
                 {
-                    IDetectorInput input = detector.gameObject.GetComponent<IDetectorInput>();
+                    Detector d = GameObject.FindObjectOfType<Detector>();
+                    IDetectorInput input = d.gameObject.GetComponent<IDetectorInput>();
                     if (input != null)
                         debugTexture = input.Texture;
                 }

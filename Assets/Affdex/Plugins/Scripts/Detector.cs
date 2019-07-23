@@ -33,9 +33,25 @@ namespace Affdex
         public Emotions emotions;
 
         /// <summary>
-        ///  to receive callback events for the detector.  All events received in Update() call.
+        /// Listener to receive callback events for the detector.  All events received in Update() call.
         /// </summary>
-        public ImageResultsListener Listener;
+        public ImageResultsListener Listener
+        {
+            get
+            {
+                if (listener == null)
+                {
+                    listener = (ImageResultsListener)GameObject.FindObjectOfType(typeof(ImageResultsListener));
+
+                }
+
+                return listener;
+            }
+            set
+            {
+                listener = value;
+            }
+        }
         
         /// <summary>
         /// Expressions for the detector to look for (Contains Unity LayerMask values (pow2)) - dont let people use this programatically
