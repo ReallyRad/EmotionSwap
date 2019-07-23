@@ -26,17 +26,6 @@ public class Listener : ImageResultsListener
                 dfv.ShowFace(faces[0]);
             }
 
-            // Adjust font size to fit the selected platform.
-            if ((Application.platform == RuntimePlatform.IPhonePlayer) ||
-                (Application.platform == RuntimePlatform.Android))
-            {
-                textArea.fontSize = 36;
-            }
-            else
-            {
-                textArea.fontSize = 12;
-            }
-
             textArea.text = faces[0].ToString();
             textArea.CrossFadeColor(Color.white, 0.2f, true, false);
         }
