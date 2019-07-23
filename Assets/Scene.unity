@@ -404,7 +404,7 @@ Prefab:
         type: 2}
       propertyPath: detector
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1367642431}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c9dcd69bece83744b76f828f1a53991, type: 2}
   m_IsPrefabParent: 0
@@ -701,6 +701,7 @@ MonoBehaviour:
   startOnWake: 1
   discrete: 0
   emotions: -1
+  Listener: {fileID: 0}
   expressions: -1
 --- !u!4 &1367642432
 Transform:
@@ -969,7 +970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1918641898
 Transform:
   m_ObjectHideFlags: 0
@@ -1031,6 +1032,7 @@ MonoBehaviour:
   startOnWake: 1
   discrete: 0
   emotions: -1
+  Listener: {fileID: 0}
   expressions: -1
 --- !u!4 &1998199868
 Transform:
