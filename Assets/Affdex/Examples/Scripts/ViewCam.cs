@@ -28,4 +28,10 @@ public class ViewCam : MonoBehaviour {
        
         transform.localScale = new Vector3(transform.localScale.y * wscale, transform.localScale.y, 1);
 	}
+
+    private void Update()
+    {
+        Texture texture = movieInput != null ? movieInput.Texture : cameraInput.Texture;
+        this.GetComponent<MeshRenderer>().material.mainTexture = texture;
+    }
 }
