@@ -593,6 +593,7 @@ GameObject:
   - component: {fileID: 1092019605}
   - component: {fileID: 1092019604}
   - component: {fileID: 1092019603}
+  - component: {fileID: 1092019607}
   m_Layer: 0
   m_Name: OSCManager
   m_TagString: Untagged
@@ -614,12 +615,12 @@ MonoBehaviour:
   autoConnect: 1
   closeOnPause: 0
   mapBundle: {fileID: 0}
-  workInEditor: 0
+  workInEditor: 1
   localPortMode: 0
   localReceiver: {fileID: 0}
   localPort: 7000
   remoteHost: 127.0.0.1
-  remotePort: 7000
+  remotePort: 7001
   useBundle: 0
 --- !u!114 &1092019604
 MonoBehaviour:
@@ -650,6 +651,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1092019607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1092019602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcbad5ce76f36574781677bd120d39b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Address: /face
+  Receiver: {fileID: 1092019604}
 --- !u!1 &1337293138
 GameObject:
   m_ObjectHideFlags: 0

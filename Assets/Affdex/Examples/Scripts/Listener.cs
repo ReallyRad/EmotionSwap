@@ -31,14 +31,17 @@ public class Listener : ImageResultsListener
                 dfv.ShowFace(faces[0]);
             }
 
+            FindObjectOfType<FaceComparer>().ComputeFaceScore(faces[0]);
+
             foreach (Expressions expression in faces[0].Expressions.Keys)
             {
                 float value;
                 faces[0].Expressions.TryGetValue(expression, out value);
 
-                var message = new OSCMessage(expression.ToString());
+                var message = new OSCMessage("/face");
+
+                message.AddValue(OSCValue.String(expression.ToString()));
                 message.AddValue(OSCValue.Float(value));
-                
 
                 Transmitter.Send(message);
             }
