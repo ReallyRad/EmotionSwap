@@ -18,17 +18,17 @@ public class FaceComparer : MonoBehaviour {
     [Header("OSC Settings")]
     public OSCReceiver Receiver;
 
-    private Expressions[] expressionsUsed = {   Expressions.Smile,
-                                                Expressions.BrowRaise,
-                                                Expressions.BrowFurrow,
-                                                Expressions.NoseWrinkle,
-                                                Expressions.UpperLipRaise,
-                                                Expressions.ChinRaise,
-                                                Expressions.LipPucker,
-                                                Expressions.LipPress,
-                                                Expressions.MouthOpen,
+    private Expressions[] expressionsUsed = {   //Expressions.Smile,
+                                                //Expressions.BrowRaise,
+                                                //Expressions.BrowFurrow,
+                                                //Expressions.NoseWrinkle,
+                                                //Expressions.UpperLipRaise,
+                                                //Expressions.ChinRaise,
+                                                //Expressions.LipPucker,
+                                                //Expressions.LipPress,
+                                                //Expressions.MouthOpen
                                                 Expressions.Smirk};
-    private float[] expressionsValues; 
+    private float[] expressionsValues; //expression values for the other face
 
     #endregion
 
@@ -53,28 +53,25 @@ public class FaceComparer : MonoBehaviour {
         {
             for (int i = 0; i < expressionsUsed.Length; i++)
             {
-                if (key == expressionsUsed[i].ToString())
-                {
-                    expressionsValues[i] = floatVal;
-                    break;
-                }
-                else Debug.Log("key not found");
+                if (key == expressionsUsed[i].ToString()) expressionsValues[i] = floatVal;
             }
         }
     }
 
-    public void ComputeFaceScore(Face otherface)
+    public void ComputeFaceScore(Face myFace) //called everytime new face information is available
     {
-        float differenceSum = 0;
-
+        float differenceSum = 0; //equivalent to all expressions being completely different
         for(int i=0; i<expressionsUsed.Length; i++)
         {
             float val;
-            if (otherface.Expressions.TryGetValue(expressionsUsed[i], out val))
-                differenceSum += val;
+            if (myFace.Expressions.TryGetValue(expressionsUsed[i], out val)) //if the expression is used in the computation
+            {
+                differenceSum += Mathf.Abs(val - expressionsValues[i]); //add the difference to the current sum.
+                Debug.Log("difference for " + expressionsUsed[i] + " : " + Mathf.Abs(val - expressionsValues[i]));
+            }
         }
 
-        expressionSimilarity = differenceSum / expressionsUsed.Length;
+        expressionSimilarity = differenceSum / expressionsUsed.Length; //ponderate the difference by the number of tracked expressions
     }
 
     #endregion
