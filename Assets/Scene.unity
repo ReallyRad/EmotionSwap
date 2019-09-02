@@ -662,6 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcbad5ce76f36574781677bd120d39b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expressionSimilarity: 0
   Address: /face
   Receiver: {fileID: 1092019604}
 --- !u!1 &1337293138
@@ -1141,7 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d7ed916bb462940afecba2d29ed178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movie: {fileID: 15200000, guid: 515d65ce3313dca4d98d8d5a84b958e4, type: 3}
+  movie: {fileID: 15200000, guid: aa4e8d0dfe1f3304281a397d7a72ebe7, type: 3}
   sampleRate: 10
 --- !u!114 &1998199867
 MonoBehaviour:
