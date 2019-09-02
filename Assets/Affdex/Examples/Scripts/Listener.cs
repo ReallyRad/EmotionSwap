@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Affdex;
+using extOSC;
 
 public class Listener : ImageResultsListener
 {
     public Text textArea;
+
+    [Header("OSC Settings")]
+    public OSCTransmitter Transmitter;
+
     public override void onFaceFound(float timestamp, int faceId)
     {
         Debug.Log("Found the face");
@@ -24,6 +29,18 @@ public class Listener : ImageResultsListener
             if (dfv != null)
             {
                 dfv.ShowFace(faces[0]);
+            }
+
+            foreach (Expressions expression in faces[0].Expressions.Keys)
+            {
+                float value;
+                faces[0].Expressions.TryGetValue(expression, out value);
+
+                var message = new OSCMessage(expression.ToString());
+                message.AddValue(OSCValue.Float(value));
+                
+
+                Transmitter.Send(message);
             }
 
             float anger;
@@ -48,7 +65,7 @@ public class Listener : ImageResultsListener
 
             float sadness;
             faces[0].Emotions.TryGetValue(Emotions.Sadness, out sadness);
-            FindObjectOfType<AudioFeedback>().SetEmotionLevel(5, sadness);
+            FindObjectOfType<AudioFeedback>().SetEmotionLevel(5, sadness*5);
 
 
             // Adjust font size to fit the selected platform.
