@@ -19,6 +19,6 @@ public class AudioFeedback : MonoBehaviour {
 
     public void SetEmotionLevel(int emotionID, float val)
     {
-        sources[emotionID].volume = val / 100f;
+        //sources[emotionID].volume = val / 100f;
     }
 }
