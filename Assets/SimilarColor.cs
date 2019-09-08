@@ -11,6 +11,6 @@ public class SimilarColor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {        
-        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.white, Color.green, 1 - FindObjectOfType<FaceComparer>().expressionSimilarity/100f);
+        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.white, 1 - FindObjectOfType<FaceComparer>().averageExpressionDifference/100f);
 	}
 }

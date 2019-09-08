@@ -7,7 +7,7 @@ using Affdex;
 public class FaceComparer : MonoBehaviour {
     #region Public Vars
 
-    public float expressionSimilarity;
+    public float averageExpressionDifference;
 
     //https://developer.affectiva.com/mapping-expressions-to-emotions/
 
@@ -18,18 +18,22 @@ public class FaceComparer : MonoBehaviour {
     [Header("OSC Settings")]
     public OSCReceiver Receiver;
 
-    private Expressions[] expressionsUsed = {   //Expressions.Smile,
-                                                //Expressions.BrowRaise,
-                                                //Expressions.BrowFurrow,
-                                                //Expressions.NoseWrinkle,
-                                                //Expressions.UpperLipRaise,
-                                                //Expressions.ChinRaise,
-                                                //Expressions.LipPucker,
-                                                //Expressions.LipPress,
-                                                //Expressions.MouthOpen
+    private Expressions[] expressionsUsed = {   Expressions.Smile,
+                                                Expressions.BrowRaise,
+                                                Expressions.BrowFurrow,
+                                                Expressions.NoseWrinkle,
+                                                Expressions.UpperLipRaise,
+                                                Expressions.ChinRaise,
+                                                Expressions.LipPucker,
+                                                Expressions.LipPress,
+                                                Expressions.MouthOpen,
                                                 Expressions.Smirk};
     private float[] expressionsValues; //expression values for the other face
 
+    [SerializeField] private float threshold;
+
+    [SerializeField] private float detectedExpressions;
+    [SerializeField] private float matchingExpressions;
     #endregion
 
     #region Unity Methods
@@ -58,20 +62,37 @@ public class FaceComparer : MonoBehaviour {
         }
     }
 
-    public void ComputeFaceScore(Face myFace) //called everytime new face information is available
+    public void ComputeFaceScore(Face myFace) //called everytime new face information is available. parameter is local face
     {
-        float differenceSum = 0; //equivalent to all expressions being completely different
+        float differenceSum = 100; //equivalent to all expressions being completely different
+        detectedExpressions = 0;
+        matchingExpressions = 0;
+
         for(int i=0; i<expressionsUsed.Length; i++)
         {
-            float val;
+            float val; // value of local face expression at index i
             if (myFace.Expressions.TryGetValue(expressionsUsed[i], out val)) //if the expression is used in the computation
             {
-                differenceSum += Mathf.Abs(val - expressionsValues[i]); //add the difference to the current sum.
-                Debug.Log("difference for " + expressionsUsed[i] + " : " + Mathf.Abs(val - expressionsValues[i]));
+                if (val > threshold && expressionsValues[i] > threshold) //if expression ON on both faces
+                {
+                    //differenceSum += Mathf.Abs(val - expressionsValues[i]); //add the difference to the current sum.
+                    detectedExpressions++;
+                    matchingExpressions++;
+                    //Debug.Log("difference for " + expressionsUsed[i] + " : " + Mathf.Abs(val - expressionsValues[i]));
+                } else if (val > threshold) { //if expression ON other face only
+                    detectedExpressions++;
+                }
+                else if (expressionsValues[i] > threshold) //if expression on local face only
+                {
+                    detectedExpressions++;
+                }
             }
         }
 
-        expressionSimilarity = differenceSum / expressionsUsed.Length; //ponderate the difference by the number of tracked expressions
+        if (detectedExpressions > 0.01f)
+            averageExpressionDifference = matchingExpressions / detectedExpressions * 100; //ponderate the difference by the number of tracked expressions
+        else
+            averageExpressionDifference = 100;
     }
 
     #endregion
