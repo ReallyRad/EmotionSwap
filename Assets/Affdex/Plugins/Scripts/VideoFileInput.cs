@@ -56,6 +56,15 @@ namespace Affdex
             detector = GetComponent<Detector>();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown("space") && movie.isPlaying)
+                movie.Pause();
+            else if (Input.GetKeyDown("space") && !movie.isPlaying)
+                movie.Play();
+
+        }
+
         void OnEnable()
         {
             if (!AffdexUnityUtils.ValidPlatform())

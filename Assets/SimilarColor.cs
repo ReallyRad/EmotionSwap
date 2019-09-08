@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class SimilarColor : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public float difference;
+    public float previousDifference;
+    float smoothTime = 0.3f;
+    float yVelocity = 0.0f;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {        
-        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.white, 1 - FindObjectOfType<FaceComparer>().averageExpressionDifference/100f);
+	void Update () {
+        difference = FindObjectOfType<FaceComparer>().averageExpressionDifference / 100f;
+        float smoothedDifference = Mathf.SmoothDamp(previousDifference, difference, ref yVelocity, smoothTime);
+        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.white, (1 - smoothedDifference) );
+        previousDifference = smoothedDifference;
 	}
 }
