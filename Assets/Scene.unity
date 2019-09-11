@@ -2487,6 +2487,7 @@ GameObject:
   - component: {fileID: 1998199866}
   - component: {fileID: 1998199869}
   - component: {fileID: 1998199870}
+  - component: {fileID: 1998199871}
   m_Layer: 0
   m_Name: VideoInput
   m_TagString: Untagged
@@ -2552,7 +2553,7 @@ VideoPlayer:
   m_RenderMode: 2
   m_AspectRatio: 2
   m_DataSource: 0
-  m_PlaybackSpeed: 1
+  m_PlaybackSpeed: 0.85
   m_AudioOutputMode: 1
   m_TargetAudioSources:
   - {fileID: 1998199870}
@@ -2647,6 +2648,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &1998199871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1998199865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454cc07430e46bd4b8a34fb3f779b2d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waiting: 0
+  skipping: 0
+  currentSpeed: 0
+  targetSpeed: 0
+  highSpeed: 5
 --- !u!1 &2139962210
 GameObject:
   m_ObjectHideFlags: 0
