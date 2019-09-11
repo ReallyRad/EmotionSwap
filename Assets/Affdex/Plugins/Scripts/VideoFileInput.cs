@@ -55,6 +55,7 @@ namespace Affdex
             movie.isLooping = true;
             t2d = new Texture2D(movie.targetTexture.width, movie.targetTexture.height, TextureFormat.RGB24, false);
             detector = GetComponent<Detector>();
+            Debug.Log("movie has " + movie.frameCount + "frames");
         }
 
         private void Update()

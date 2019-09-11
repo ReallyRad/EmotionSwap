@@ -9,6 +9,8 @@ public class SimilarColor : MonoBehaviour {
     float smoothTime = 0.3f;
     float yVelocity = 0.0f;
 
+    public float threshold;
+
     // Use this for initialization
     void Start () {
 		
@@ -20,5 +22,8 @@ public class SimilarColor : MonoBehaviour {
         float smoothedDifference = Mathf.SmoothDamp(previousDifference, difference, ref yVelocity, smoothTime);
         GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.white, (1 - smoothedDifference) );
         previousDifference = smoothedDifference;
+
+        if (FindObjectOfType<GameControl>().waiting && smoothedDifference > threshold)
+            FindObjectOfType<GameControl>().Skip();
 	}
 }

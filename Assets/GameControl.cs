@@ -8,7 +8,6 @@ public class GameControl : MonoBehaviour {
     // Use this for initialization
 
     public bool waiting;
-    public bool skipping;
 
     public float currentSpeed;
     public float targetSpeed;
@@ -35,11 +34,13 @@ public class GameControl : MonoBehaviour {
         currentSpeed = smoothhedSpeed;
 
         if (Input.GetKeyDown(KeyCode.P)) Skip();
+        if (currentSpeed < 0.2) waiting = true;
     }
 
     public void Skip()
     {
         GetComponent<VideoPlayer>().playbackSpeed = highSpeed;
         currentSpeed = highSpeed;
+        waiting = false;
     }
 }
