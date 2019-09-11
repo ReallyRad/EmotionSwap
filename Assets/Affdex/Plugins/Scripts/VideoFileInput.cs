@@ -1,6 +1,7 @@
 ﻿// Unity derives Video File Input Component UI from this file
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Video;
 
 namespace Affdex
 {
@@ -16,7 +17,7 @@ namespace Affdex
         /// <summary>
         /// Texture to sample
         /// </summary>
-        public MovieTexture movie;
+        public VideoPlayer movie;
 #endif
         /// <summary>
         /// Number of samples per second
@@ -41,7 +42,7 @@ namespace Affdex
             get
             {
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_XBOXONE
-                return movie;
+                return movie.targetTexture;
 #else
                 return new Texture();
 #endif
@@ -51,8 +52,8 @@ namespace Affdex
         void Start()
         {
             movie.Play();
-            movie.loop = true;
-            t2d = new Texture2D(movie.width, movie.height, TextureFormat.RGB24, false);
+            movie.isLooping = true;
+            t2d = new Texture2D(movie.targetTexture.width, movie.targetTexture.height, TextureFormat.RGB24, false);
             detector = GetComponent<Detector>();
         }
 
@@ -76,6 +77,9 @@ namespace Affdex
 
         private IEnumerator SampleRoutine()
         {
+            Debug.Log("startign sample coroutine");
+            if (enabled) Debug.Log("enabled");
+
             while (enabled)
             {
                 
@@ -84,25 +88,25 @@ namespace Affdex
                 {
                     ProcessFrame();
                 }
+
             }
         }
 
 
         private void ProcessFrame()
         {
-
+            Debug.Log("Process Frame");
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_XBOXONE
             if (this.movie != null)
             {
 
                 //A render texture is required to copy the pixels from the movie clip
-                RenderTexture rt = RenderTexture.GetTemporary(movie.width, movie.height, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default, 1);
+                RenderTexture rt = RenderTexture.GetTemporary(movie.targetTexture.width, movie.targetTexture.height, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default, 1);
                 
                 RenderTexture.active = rt;
                 
                 //Copy the movie texture to the render texture
-                Graphics.Blit(movie, rt);
-
+                Graphics.Blit(movie.targetTexture, rt);
 
                 //Read the render texture to our temporary texture
                 t2d.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
