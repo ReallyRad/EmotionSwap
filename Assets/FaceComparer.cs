@@ -24,10 +24,12 @@ public class FaceComparer : MonoBehaviour {
                                                 Expressions.NoseWrinkle,
                                                 Expressions.UpperLipRaise,
                                                 Expressions.ChinRaise,
-                                                Expressions.LipPucker,
                                                 Expressions.LipPress,
                                                 Expressions.MouthOpen,
-                                                Expressions.Smirk};
+                                                Expressions.Smirk,
+                                                Expressions.InnerBrowRaise,
+                                                Expressions.LipCornerDepressor,
+                                                };
     private float[] expressionsValues; //expression values for the other face
 
     [SerializeField] private float threshold;
@@ -40,6 +42,7 @@ public class FaceComparer : MonoBehaviour {
 
     protected virtual void Start()
     {
+       
         Receiver.Bind(Address, ReceivedMessage);
         expressionsValues = new float[expressionsUsed.Length];
     }
@@ -67,6 +70,7 @@ public class FaceComparer : MonoBehaviour {
         float differenceSum = 100; //equivalent to all expressions being completely different
         detectedExpressions = 0;
         matchingExpressions = 0;
+        
 
         for(int i=0; i<expressionsUsed.Length; i++)
         {
