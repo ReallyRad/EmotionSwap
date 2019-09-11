@@ -14,11 +14,13 @@ public class GameControl : MonoBehaviour {
 
     public float highSpeed;
 
-    float smoothTime = 2f;
+    public float smoothTime = 2f;
     float yVelocity = 0.0f;
 
     public AudioSource peng;
     public AudioSource loopThis;
+
+    public float loopThisFadeFactor = 10f ;
 
     void Start () {
         //skip to a random point in video with slowing down
@@ -35,8 +37,8 @@ public class GameControl : MonoBehaviour {
         GetComponent<VideoPlayer>().playbackSpeed = smoothhedSpeed;
         currentSpeed = smoothhedSpeed;
 
-        loopThis.volume = currentSpeed / 10f;
-        loopThis.pitch = currentSpeed / 10f;
+        loopThis.volume = currentSpeed / loopThisFadeFactor;
+        loopThis.pitch = currentSpeed / loopThisFadeFactor;
 
         if (Input.GetKeyDown(KeyCode.P)) Skip();
         if (currentSpeed < 0.2) waiting = true;
@@ -44,7 +46,7 @@ public class GameControl : MonoBehaviour {
 
     public void Skip()
     {
-        GetComponent<VideoPlayer>().playbackSpeed = highSpeed;
+        //GetComponent<VideoPlayer>().playbackSpeed = highSpeed;
         currentSpeed = highSpeed;
         waiting = false;
 

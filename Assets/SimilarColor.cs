@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class SimilarColor : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class SimilarColor : MonoBehaviour {
     float yVelocity = 0.0f;
 
     public float threshold;
+
+    public VideoPlayer player;
 
     // Use this for initialization
     void Start () {
