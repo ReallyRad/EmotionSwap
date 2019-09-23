@@ -33,8 +33,8 @@ public class GameControl : MonoBehaviour {
 
     public void Skip()
     {
-        //GetComponent<VideoPlayer>().playbackSpeed = highSpeed;
         currentSpeed = highSpeed;
         waiting = false;
     }
+
 }
