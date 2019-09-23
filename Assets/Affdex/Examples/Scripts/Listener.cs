@@ -21,7 +21,7 @@ public class Listener : ImageResultsListener
     public override void onFaceLost(float timestamp, int faceId)
     {
         Debug.Log("Lost the face");
-        FindObjectOfType<GameControl>().Skip();
+        if(FindObjectOfType<GameControl>() != null) FindObjectOfType<GameControl>().Skip();
     }
     
     public override void onImageResults(Dictionary<int, Face> faces)
