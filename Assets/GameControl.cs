@@ -17,9 +17,6 @@ public class GameControl : MonoBehaviour {
     public float smoothTime = 2f;
     float yVelocity = 0.0f;
 
-    public AudioSource peng;
-    public AudioSource loopThis;
-
     public float loopThisFadeFactor = 10f ;
 
     void Start () {
@@ -37,11 +34,9 @@ public class GameControl : MonoBehaviour {
         GetComponent<VideoPlayer>().playbackSpeed = smoothhedSpeed;
         currentSpeed = smoothhedSpeed;
 
-        loopThis.volume = currentSpeed / loopThisFadeFactor;
-        loopThis.pitch = currentSpeed / loopThisFadeFactor;
-
         if (Input.GetKeyDown(KeyCode.P)) Skip();
         if (currentSpeed < 0.2) waiting = true;
+        GetComponent<AudioReverbFilter>().decayTime = 1/smoothhedSpeed;
     }
 
     public void Skip()
@@ -49,7 +44,5 @@ public class GameControl : MonoBehaviour {
         //GetComponent<VideoPlayer>().playbackSpeed = highSpeed;
         currentSpeed = highSpeed;
         waiting = false;
-
-        peng.Play();
     }
 }

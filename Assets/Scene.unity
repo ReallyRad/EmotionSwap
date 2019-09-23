@@ -1108,6 +1108,7 @@ GameObject:
   - component: {fileID: 1998199869}
   - component: {fileID: 1998199870}
   - component: {fileID: 1998199871}
+  - component: {fileID: 1998199872}
   m_Layer: 0
   m_Name: VideoInput
   m_TagString: Untagged
@@ -1176,7 +1177,7 @@ VideoPlayer:
   m_PlaybackSpeed: 0.85
   m_AudioOutputMode: 1
   m_TargetAudioSources:
-  - {fileID: 0}
+  - {fileID: 1998199870}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
@@ -1185,7 +1186,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 0
+  m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
 --- !u!82 &1998199870
@@ -1282,8 +1283,28 @@ MonoBehaviour:
   waiting: 0
   currentSpeed: 0
   targetSpeed: 0
-  highSpeed: 5
-  smoothTime: 2
-  peng: {fileID: 0}
-  loopThis: {fileID: 0}
+  highSpeed: 1.5
+  smoothTime: 1
   loopThisFadeFactor: 10
+--- !u!164 &1998199872
+AudioReverbFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1998199865}
+  m_Enabled: 1
+  m_DryLevel: 0
+  m_Room: 0
+  m_RoomHF: 0
+  m_DecayTime: 1
+  m_DecayHFRatio: 0.5
+  m_ReflectionsLevel: -10000
+  m_ReverbLevel: 0
+  m_ReverbDelay: 0.04
+  m_Diffusion: 100
+  m_Density: 100
+  m_HFReference: 5000
+  m_RoomLF: 0
+  m_LFReference: 250
+  m_ReflectionsDelay: 0
+  m_ReverbPreset: 27
