@@ -55,7 +55,7 @@ public class Listener : ImageResultsListener
             }
             else
             {
-                textArea.fontSize = 12;
+                textArea.fontSize = 25;
             }
 
             textArea.text = faces[0].ToString();
@@ -74,7 +74,8 @@ public class Listener : ImageResultsListener
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        if (currentFaces.Count > 0)
-            FindObjectOfType<FaceComparer>().ComputeFaceScore(currentFaces[0]);
+        if(currentFaces != null)
+            if (currentFaces.Count > 0)
+                FindObjectOfType<FaceComparer>().ComputeFaceScore(currentFaces[0]);
     }
 }
