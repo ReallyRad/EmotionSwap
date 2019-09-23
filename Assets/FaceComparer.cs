@@ -18,7 +18,7 @@ public class FaceComparer : MonoBehaviour {
     [Header("OSC Settings")]
     public OSCReceiver Receiver;
 
-    private Expressions[] expressionsUsed = {   Expressions.Smile,
+    public Expressions[] expressionsUsed = {   Expressions.Smile,
                                                 Expressions.BrowRaise,
                                                 Expressions.BrowFurrow,
                                                 Expressions.NoseWrinkle,
@@ -30,9 +30,9 @@ public class FaceComparer : MonoBehaviour {
                                                 Expressions.InnerBrowRaise,
                                                 Expressions.LipCornerDepressor,
                                                 };
-    private float[] expressionsValues; //expression values for the other face
+    public float[] expressionsValues; //expression values for the other face
 
-    [SerializeField] private float threshold;
+    public float threshold;
 
     [SerializeField] private float detectedExpressions;
     [SerializeField] private float matchingExpressions;
@@ -77,20 +77,33 @@ public class FaceComparer : MonoBehaviour {
             float val; // value of local face expression at index i
             if (myFace.Expressions.TryGetValue(expressionsUsed[i], out val)) //if the expression is used in the computation
             {
+                FindObjectOfType<ExpressionsPanelBehavior>()._expressionsImages[i].color = Color.clear;
+
+
                 if (val > threshold && expressionsValues[i] > threshold) //if expression ON on both faces
                 {
-                    //differenceSum += Mathf.Abs(val - expressionsValues[i]); //add the difference to the current sum.
                     detectedExpressions++;
                     matchingExpressions++;
-                    //Debug.Log("difference for " + expressionsUsed[i] + " : " + Mathf.Abs(val - expressionsValues[i]));
-                } else if (val > threshold) { //if expression ON other face only
-                    detectedExpressions++;
+                    FindObjectOfType<ExpressionsPanelBehavior>()._expressionsImages[i].color = Color.white;
+
                 }
-                else if (expressionsValues[i] > threshold) //if expression on local face only
-                {
+                else if (val > threshold) { //if expression on local face only
                     detectedExpressions++;
+                    FindObjectOfType<ExpressionsPanelBehavior>()._expressionsImages[i].color = Color.white;
+
+                }
+                else if (expressionsValues[i] > threshold) //if expression on other face only
+                {
+                    detectedExpressions++;  
+                    /*
+                    LeanTween.value(0, 1, 0.5f).setOnUpdate((float tweenValue) =>
+                    {
+                        FindObjectOfType<ExpressionsPanelBehavior>()._expressionsImages[i].color = Color.Lerp(Color.clear, Color.white, tweenValue);
+                    });*/
+
                 }
             }
+
         }
 
         if (detectedExpressions > 0.01f)
