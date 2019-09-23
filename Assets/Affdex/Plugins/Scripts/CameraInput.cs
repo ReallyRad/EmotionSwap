@@ -100,19 +100,20 @@ namespace Affdex
             if (!AffdexUnityUtils.ValidPlatform())
                 return;
             detector = GetComponent<Detector>();
-#if !UNITY_XBOXONE && UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_IOS || UNITY_ANDROID
             devices = WebCamTexture.devices;
+            Debug.Log("available devices " + devices);
             if (devices.Length > 0)
             {
                 SelectCamera(isFrontFacing);
 
                 if (device.name != "Null")
                 {
-                    cameraTexture = new WebCamTexture(device.name, targetWidth, targetHeight, (int)sampleRate);
+                    Debug.Log("setting camera here");
+                   // cameraTexture = new WebCamTexture(device.name, targetWidth, targetHeight, (int)sampleRate);
+                    cameraTexture = new WebCamTexture(devices[1].name, targetWidth, targetHeight, (int)sampleRate);
                     cameraTexture.Play();
                 }
             }
-#endif
         }
 
         /// <summary>
@@ -125,13 +126,16 @@ namespace Affdex
 #if !UNITY_XBOXONE && UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX || UNITY_IOS || UNITY_ANDROID
             foreach (WebCamDevice d in devices)
             {
+                Debug.Log("you can use camera " + name);
                 if (d.name.Length > 1 && d.name == name)
                 {
-                        cameraTexture.Stop();
-                        device = d;
+                    cameraTexture.Stop();
+                    device = d;
 
-                        cameraTexture = new WebCamTexture(device.name, targetWidth, targetHeight, (int)sampleRate);
-                        cameraTexture.Play();
+                    cameraTexture = new WebCamTexture(device.name, targetWidth, targetHeight, (int)sampleRate);
+                    cameraTexture.Play();
+                    Debug.Log("setting camera " + name);
+
                 }
                 else if (d.isFrontFacing == isFrontFacing)
                 {
