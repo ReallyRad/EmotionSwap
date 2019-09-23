@@ -19,14 +19,6 @@ public class GameControl : MonoBehaviour {
 
     public float loopThisFadeFactor = 10f ;
 
-    void Start () {
-        //skip to a random point in video with slowing down
-
-        //wait for matching score to be high enough
-
-        //match audio pitch to video skipping
-    }
-	
 	// Update is called once per frame
 	void Update () {
         //GetComponent<VideoPlayer>().frame
