@@ -34,7 +34,6 @@ public class Listener : ImageResultsListener
                 dfv.ShowFace(faces[0]);
             }
 
-
             foreach (Expressions expression in faces[0].Expressions.Keys)
             {
                 float value;
@@ -47,44 +46,6 @@ public class Listener : ImageResultsListener
 
                 Transmitter.Send(message);
             }
-
-            float anger;
-            faces[0].Emotions.TryGetValue(Emotions.Anger, out anger);
-            FindObjectOfType<AudioFeedback>().SetEmotionLevel(0, anger);
-            FindObjectOfType<ControlVolumeEmotions>().anger.volume = anger / 100;
-            FindObjectOfType<ControlVolumeEmotions>().angerRenderer.material.color = Color.Lerp(Color.black, Color.white, anger / 100);
-
-            float fear;
-            faces[0].Emotions.TryGetValue(Emotions.Fear, out fear);
-            FindObjectOfType<AudioFeedback>().SetEmotionLevel(1, fear);
-            FindObjectOfType<ControlVolumeEmotions>().fear.volume = fear/100;
-            FindObjectOfType<ControlVolumeEmotions>().fearRenderer.material.color = Color.Lerp(Color.black, Color.white, fear / 100);
-
-            float disgust;
-            faces[0].Emotions.TryGetValue(Emotions.Disgust, out disgust);
-            FindObjectOfType<AudioFeedback>().SetEmotionLevel(2, disgust);
-            FindObjectOfType<ControlVolumeEmotions>().disgust.volume = disgust / 100;
-            FindObjectOfType<ControlVolumeEmotions>().disgustRenderer.material.color = Color.Lerp(Color.black, Color.white, disgust / 100);
-
-
-            float joy;
-            faces[0].Emotions.TryGetValue(Emotions.Joy, out joy);
-            FindObjectOfType<AudioFeedback>().SetEmotionLevel(3, joy);
-            FindObjectOfType<ControlVolumeEmotions>().happiness.volume = joy / 100;
-            FindObjectOfType<ControlVolumeEmotions>().happinessRenderer.material.color = Color.Lerp(Color.black, Color.white, joy / 100);
-
-            float surprise;
-            faces[0].Emotions.TryGetValue(Emotions.Surprise, out surprise);
-            FindObjectOfType<AudioFeedback>().SetEmotionLevel(4, surprise);
-            FindObjectOfType<ControlVolumeEmotions>().surprise.volume = surprise / 100;
-            FindObjectOfType<ControlVolumeEmotions>().surpriserenderer.material.color = Color.Lerp(Color.black, Color.white, surprise / 100);
-
-            float sadness;
-            faces[0].Emotions.TryGetValue(Emotions.Sadness, out sadness);
-            FindObjectOfType<AudioFeedback>().SetEmotionLevel(5, sadness*5);
-            FindObjectOfType<ControlVolumeEmotions>().sadness.volume = sadness / 100;
-            FindObjectOfType<ControlVolumeEmotions>().sadnessRenderer.material.color = Color.Lerp(Color.black, Color.white, sadness / 100);
-
 
             // Adjust font size to fit the selected platform.
             if ((Application.platform == RuntimePlatform.IPhonePlayer) ||
