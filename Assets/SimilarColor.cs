@@ -23,7 +23,7 @@ public class SimilarColor : MonoBehaviour {
 	void Update () {
         difference = FindObjectOfType<FaceComparer>().averageExpressionDifference / 100f;
         float smoothedDifference = Mathf.SmoothDamp(previousDifference, difference, ref yVelocity, smoothTime);
-        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.white, (1 - smoothedDifference) );
+        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.white, Color.white, (1 - smoothedDifference) );
         previousDifference = smoothedDifference;
 
         if (FindObjectOfType<GameControl>().waiting && smoothedDifference * 100 > threshold )
